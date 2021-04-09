@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.myfirst.storagedemo.managers.DatabaseManager;
+import com.myfirst.storagedemo.managers.ContentManager;
 import com.myfirst.storagedemo.models.User;
 
 import java.io.FileInputStream;
@@ -27,7 +27,7 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
 
     private TextView resultTV;
 
-    private final DatabaseManager databaseManager = DatabaseManager.instance;
+    private final ContentManager contentManager = ContentManager.instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +64,14 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void clearDataFromDB() {
-        int deletedRows = databaseManager.clearData();
+        int deletedRows = contentManager.clearData();
 
         String result = "--- Deleted " + deletedRows + " row(s)\n";
         resultTV.append(result);
     }
 
     private void readDataFromDB() {
-        ArrayList<User> users = databaseManager.readData();
+        ArrayList<User> users = contentManager.readData();
 
         if (users.isEmpty()) {
             resultTV.append("Empty db!\n");
@@ -90,9 +90,9 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
 
         User user = new User(name, email);
 
-        long newRowID = databaseManager.addData(user);
+        long id = contentManager.addData(user);
 
-        String result = "--- Add new row ID " + newRowID + "\n";
+        String result = "--- Add new row ID " + id + "\n";
         resultTV.append(result);
 
         nameET.setText("");

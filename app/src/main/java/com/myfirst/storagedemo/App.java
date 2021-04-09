@@ -2,7 +2,7 @@ package com.myfirst.storagedemo;
 
 import android.app.Application;
 
-import com.myfirst.storagedemo.managers.DatabaseManager;
+import com.myfirst.storagedemo.managers.ContentManager;
 
 public class App extends Application {
 
@@ -10,6 +10,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        DatabaseManager.init(this);
+        ContentManager.init(this);
     }
 }

@@ -2,9 +2,9 @@ package com.myfirst.storagedemo.database;
 
 import android.provider.BaseColumns;
 
-public class DataBaseContract {
+public class DataContract {
 
-    public DataBaseContract() {
+    public DataContract() {
     }
 
     public static class Users implements BaseColumns {

@@ -18,6 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".providers.UsersContentProvider"
+            android:authorities="com.myfirst.storagedemo.provider"
+            android:exported="true"
+            android:permission="com.myfirst.storagedemo.provider.permission.READ_PROVIDER" />
+
     </application>
 
 </manifest>
