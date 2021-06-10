@@ -42,6 +42,14 @@ public class DatabaseManager {
     public ArrayList<User> readData() {
         SQLiteDatabase db = getDatabase(false);
 
+        String[] columns = new String[]{
+                DataBaseContract.Users.COLUMN_USER_NAME,
+                DataBaseContract.Users.COLUMN_USER_EMAIL
+        };
+
+        String selection = DataBaseContract.Users.COLUMN_USER_NAME + " = ?";
+        String[] selectionArgs = new String[]{"Dasha"};
+
         Cursor cursor = db.query(
                 DataBaseContract.Users.TABLE_NAME,
                 null, // array of columns to return

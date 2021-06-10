@@ -13,6 +13,9 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final static String NAME_KEY = "name_key";
+    private final static String STORAGE_NAME = "main_storage";
+
     private EditText nameET;
     private SharedPreferences sPrefs;
 
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveData();
+//                saveData();
                 Intent intent = new Intent(MainActivity.this, DatabaseActivity.class);
                 startActivity(intent);
                 finish();
@@ -36,24 +39,24 @@ public class MainActivity extends AppCompatActivity {
 
         sPrefs = getPreferences(MODE_PRIVATE);
 //        or
-//        sPrefs = getSharedPreferences("file_name", MODE_PRIVATE);
+//        sPrefs = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
 
-//        nameET.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
+        nameET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                saveData();
+            }
+        });
 
         loadData();
     }
@@ -61,20 +64,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
+        saveData();
     }
 
     private void saveData() {
         String name = nameET.getText().toString();
         if (!name.isEmpty()) {
             sPrefs.edit()
-                    .putString("name_key", name)
+                    .putString(NAME_KEY, name)
                     .apply();
         }
     }
 
     private void loadData() {
-        String name = sPrefs.getString("name_key", "");
+        String name = sPrefs.getString(NAME_KEY, "");
         nameET.setText(name);
     }
 }
